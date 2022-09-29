@@ -22,9 +22,9 @@ export const gettingStarted = [
 ]
 
 export const examples = {
-  publish: 'https://gist.do/1c0d258d6acbcfa7ed27ea12ea277626',
-  publishAPI: 'https://gist.do/api/nathanclevenger/1c0d258d6acbcfa7ed27ea12ea277626',
-  publishWorker: 'https://gist.do/worker/nathanclevenger/1c0d258d6acbcfa7ed27ea12ea277626',
+  publish: 'https://gist.do/28a6b4bfde485b704a2fcc9b6c874e79',
+  publishAPI: 'https://gist.do/api/nathanclevenger/28a6b4bfde485b704a2fcc9b6c874e79',
+  publishWorker: 'https://gist.do/worker/nathanclevenger/28a6b4bfde485b704a2fcc9b6c874e79',
 }
 
 const headers = {
