@@ -38,7 +38,7 @@ export default {
     const data = await fetch('https://api.github.com/gists/' + id).then(res => res.json()).catch(({name,message,stack}) => ({name,message,stack}))
     
 //     const resourceLength = resource.length()
-    const idLength = id?.length()
+    const idLength = id && id.length()
     
 //     const data = { id, hello: user.city }
     
