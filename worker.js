@@ -48,7 +48,7 @@ export default {
     
     const build = await Promise.all(fileNames.map(name => fetch(files[name].raw_url.replace('https://','https://esbuild.do/')).then(res => res.text())))
     
-    return json({ api, fileNames, files, user })
+    return json({ api, fileNames, files, build, user })
   }
 }
 
