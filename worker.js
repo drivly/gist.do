@@ -35,11 +35,15 @@ export default {
     const gistId = pathSegments[0] == 32 ? pathSegments[0] : pathSegments[1]
     
     
-    const gistURL = 'https://api.github.com/gists/' + id
+    const gistURL = 'https://api.github.com/gists/' + gistId
     const data = await fetch(gistURL).then(res => res.text()).catch(({name,message,stack}) => ({name,message,stack}))
     
+    const files = Object.keys(data)
     
-    return json({ api,  gistURL, data,  user })
+    
+    
+    
+    return json({ api,  gistURL, data, files, user })
   }
 }
 
