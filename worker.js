@@ -33,23 +33,36 @@ const headers = {
 
 export default {
   fetch: async (req, env) => {
-    const { user, hostname, pathname, rootPath, pathSegments, query } = await env.CTX.fetch(req).then(res => res.json())
+    const { user, hostname, pathname, subdomain, rootPath, pathSegments, query } = await env.CTX.fetch(req).then(res => res.json())
     if (rootPath) return json({ api, gettingStarted, examples, user })
     
-    const [ type, id ] = pathSegments
-    const gistId = type.length == 32 ? type : id
+    const workerId = subdomain.length == 32 ? subdomain : undefined
     
+    // TODO - invoke if worker exists
     
-    const gistURL = 'https://api.github.com/gists/' + gistId
-    const data = await fetch(gistURL,{headers}).then(res => res.json()).catch(({name,message,stack}) => ({name,message,stack}))
+    // TODO - otherwise if there is a gistID from a worker but not a worker, then build & deploy
     
-    const { files } = data
-    const fileNames = Object.keys(files)
-    
-    const build = await Promise.all(fileNames.map(name => fetch(files[name].raw_url.replace('https://','https://esbuild.do/')).then(res => res.text())))
-    const codeLines = build.split('\n')
-    
-    return json({ api, fileNames, files, codeLines, build, user })
+    if (!workerId) {
+      const [ type, id ] = pathSegments
+      const gistId = type.length == 32 ? type : id
+
+
+      const gistURL = 'https://api.github.com/gists/' + gistId
+      const data = await fetch(gistURL,{headers}).then(res => res.json()).catch(({name,message,stack}) => ({name,message,stack}))
+
+      const { files } = data
+      const fileNames = Object.keys(files)
+
+      const build = await Promise.all(fileNames.map(name => fetch(files[name].raw_url.replace('https://','https://esbuild.do/')).then(res => res.text())))
+      const codeLines = build.split('\n')
+      
+      // TODO - deploy worker
+
+      return json({ api, fileNames, files, codeLines, build, user })
+    } else {
+      // TODO call the dynamic service binding
+      return json({ api, workerId, user })
+    }
   }
 }
 
