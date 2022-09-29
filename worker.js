@@ -35,7 +35,7 @@ export default {
     // TODO: Implement this
     const [ id ] = pathSegments
     
-    const data = await fetch('https://api.github.com/gists/' + id).then(res => res.json())
+    const data = await fetch('https://api.github.com/gists/' + id).then(res => res.json()).catch(({name,message,stack}) => ({name,message,stack}))
     
 //     const resourceLength = resource.length()
     const idLength = id?.length()
