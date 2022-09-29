@@ -55,7 +55,7 @@ export default {
       const fileNames = Object.keys(files)
 
       const build = await Promise.all(fileNames.map(name => fetch(files[name].raw_url.replace('https://','https://esbuild.do/')).then(res => res.text())))
-      const codeLines = build.split('\n')
+      const codeLines = build.map(file => file.split('\n'))
       
       // TODO - deploy worker
       
