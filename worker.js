@@ -46,7 +46,7 @@ export default {
     const { files } = data
     const fileNames = Object.keys(files)
     
-    const build = await Promise.all(fileNames.map(name => fetch(files[name].raw_url.replace('https://','https://esbuild.do/')).then(res => res.text()))
+    const build = await Promise.all(fileNames.map(name => fetch(files[name].raw_url.replace('https://','https://esbuild.do/')).then(res => res.text())))
     
     return json({ api, fileNames, files, user })
   }
