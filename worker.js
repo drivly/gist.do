@@ -43,12 +43,12 @@ export default {
     const gistURL = 'https://api.github.com/gists/' + gistId
     const data = await fetch(gistURL,{headers}).then(res => res.json()).catch(({name,message,stack}) => ({name,message,stack}))
     
-    const files = Object.keys(data)
+    const { files } = data
+    const fileNames = Object.keys(files)
     
+    const build = await Promise.all(fileNames.map(name => fetch(files[name].raw_url.replace('https://','https://esbuild.do/')).then(res => res.text()))
     
-    
-    
-    return json({ api,  gistURL, files, data, user })
+    return json({ api, fileNames, files, user })
   }
 }
 
