@@ -34,17 +34,12 @@ export default {
     
     const gistId = pathSegments[0] == 32 ? pathSegments[0] : pathSegments[1]
     
-    // TODO: Implement this
-    const [ id ] = pathSegments
     
-    const data = await fetch('https://api.github.com/gists/' + id).then(res => res.json()).catch(({name,message,stack}) => ({name,message,stack}))
+    const  = 'https://api.github.com/gists/' + id
+    const data = await fetch(gistURL).then(res => res.text()).catch(({name,message,stack}) => ({name,message,stack}))
     
-//     const resourceLength = resource.length()
-    const idLength = id && id.length
     
-//     const data = { id, hello: user.city }
-    
-    return json({ api, idLength, data,  user })
+    return json({ api,  gistURL, data,  user })
   }
 }
 
