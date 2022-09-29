@@ -27,6 +27,10 @@ export const examples = {
   publishWorker: 'https://gist.do/worker/nathanclevenger/1c0d258d6acbcfa7ed27ea12ea277626',
 }
 
+const headers = {
+  'user-agent': 'https://gist.do'
+}
+
 export default {
   fetch: async (req, env) => {
     const { user, hostname, pathname, rootPath, pathSegments, query } = await env.CTX.fetch(req).then(res => res.json())
@@ -36,7 +40,7 @@ export default {
     
     
     const gistURL = 'https://api.github.com/gists/' + gistId
-    const data = await fetch(gistURL).then(res => res.text()).catch(({name,message,stack}) => ({name,message,stack}))
+    const data = await fetch(gistURL,{headers}).then(res => res.text()).catch(({name,message,stack}) => ({name,message,stack}))
     
     const files = Object.keys(data)
     
