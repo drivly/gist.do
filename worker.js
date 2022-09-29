@@ -45,7 +45,8 @@ export default {
     if (!workerId) {
       const [ type, id ] = pathSegments
       const gistId = type.length == 32 ? type : id
-
+      
+      const workerURL = `https://${gistId}.gist.do`
 
       const gistURL = 'https://api.github.com/gists/' + gistId
       const data = await fetch(gistURL,{headers}).then(res => res.json()).catch(({name,message,stack}) => ({name,message,stack}))
@@ -58,10 +59,12 @@ export default {
       
       // TODO - deploy worker
 
-      return json({ api, fileNames, files, codeLines, build, user })
+      return json({ api, workerURL. fileNames, files, codeLines, build, user })
     } else {
       // TODO call the dynamic service binding
-      return json({ api, workerId, user })
+      
+      const workerURL = `https://${workerId}.gist.do`
+      return json({ api, workerURL, workerId, user })
     }
   }
 }
