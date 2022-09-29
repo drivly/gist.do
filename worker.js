@@ -36,18 +36,19 @@ export default {
     const { user, hostname, pathname, rootPath, pathSegments, query } = await env.CTX.fetch(req).then(res => res.json())
     if (rootPath) return json({ api, gettingStarted, examples, user })
     
-    const gistId = pathSegments[0].length == 32 ? pathSegments[0] : pathSegments[1]
+    const [ type, id ] = pathSegments
+    const gistId = type.length == 32 ? type : id
     
     
     const gistURL = 'https://api.github.com/gists/' + gistId
-    const data = await fetch(gistURL,{headers}).then(res => res.text()).catch(({name,message,stack}) => ({name,message,stack}))
+    const data = await fetch(gistURL,{headers}).then(res => res.json()).catch(({name,message,stack}) => ({name,message,stack}))
     
     const files = Object.keys(data)
     
     
     
     
-    return json({ api,  gistURL, data, files, user })
+    return json({ api,  gistURL, files, data, user })
   }
 }
 
