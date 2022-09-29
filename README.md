@@ -1,10 +1,10 @@
-# worker.templates.do - Templates
+# gist.do - Transform Gists into Content, APIs, Scripts, and more
 
 ## Getting Started
 
 If you don't already have a browser extension to pretty-print JSON and make links clickable, start by installing that: <https://extensions.do>
 
-Then you interactively use the API at: <https://templates.do/api>
+Then you interactively use the API at: <https://gist.do/api>
 
 ```json
 {
