@@ -34,7 +34,11 @@ export default {
     
     // TODO: Implement this
     const [ resource, id ] = pathSegments
-    const data = { resource, id, hello: user.city }
+    
+    const resourceLength = resource.length()
+    const idLength = id.length()
+    
+    const data = { resourceLength, resource, idLength, id, hello: user.city }
     
     return json({ api, data, user })
   }
