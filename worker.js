@@ -58,6 +58,8 @@ export default {
       const codeLines = build.split('\n')
       
       // TODO - deploy worker
+      
+      // TODO - comment on the Gist with workerURL
 
       return json({ api, workerURL. fileNames, files, codeLines, build, user })
     } else {
