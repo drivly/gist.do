@@ -36,7 +36,7 @@ export default {
     const { user, hostname, pathname, subdomain, rootPath, pathSegments, query } = await env.CTX.fetch(req).then(res => res.json())
     if (rootPath) return json({ api, gettingStarted, examples, user })
     
-    const workerId = subdomain?.length == 32 ? subdomain : undefined
+    const workerId = subdomain && subdomain.length == 32 ? subdomain : undefined
     
     // TODO - invoke if worker exists
     
