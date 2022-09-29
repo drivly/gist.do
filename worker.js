@@ -1,18 +1,19 @@
 export const api = {
-  icon: '🚀',
-  name: 'templates.do',
-  description: 'Cloudflare Worker Template',
-  url: 'https://templates.do/api',
-  type: 'https://apis.do/templates',
+  icon: '🛠',
+  name: 'gist.do',
+  description: 'Transform Gists into Content, APIs, Scripts, and more',
+  url: 'https://gist.do/api',
+  type: 'https://apis.do/code',
   endpoints: {
-    listCategories: 'https://templates.do/api',
-    getCategory: 'https://templates.do/:type',
+    publish: 'https://gist.do/:gist',
+    publishAPI: 'https://gist.do/api/:gist',
+    publishWorker: 'https://gist.do/worker/:gist',
   },
-  site: 'https://templates.do',
-  login: 'https://templates.do/login',
-  signup: 'https://templates.do/signup',
-  subscribe: 'https://templates.do/subscribe',
-  repo: 'https://github.com/drivly/templates.do',
+  site: 'https://gist.do',
+  login: 'https://gist.do/login',
+  signup: 'https://gist.do/signup',
+  subscribe: 'https://gist.do/subscribe',
+  repo: 'https://github.com/drivly/gist.do',
 }
 
 export const gettingStarted = [
@@ -21,7 +22,9 @@ export const gettingStarted = [
 ]
 
 export const examples = {
-  listItems: 'https://templates.do/worker',
+  publish: 'https://gist.do/1c0d258d6acbcfa7ed27ea12ea277626',
+  publishAPI: 'https://gist.do/api/nathanclevenger/1c0d258d6acbcfa7ed27ea12ea277626',
+  publishWorker: 'https://gist.do/worker/nathanclevenger/1c0d258d6acbcfa7ed27ea12ea277626',
 }
 
 export default {
