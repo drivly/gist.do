@@ -35,7 +35,7 @@ export default {
     const gistId = pathSegments[0] == 32 ? pathSegments[0] : pathSegments[1]
     
     
-    const  = 'https://api.github.com/gists/' + id
+    const gistURL = 'https://api.github.com/gists/' + id
     const data = await fetch(gistURL).then(res => res.text()).catch(({name,message,stack}) => ({name,message,stack}))
     
     
