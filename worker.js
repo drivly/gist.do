@@ -33,14 +33,16 @@ export default {
     if (rootPath) return json({ api, gettingStarted, examples, user })
     
     // TODO: Implement this
-    const [ resource, id ] = pathSegments
+    const [ id ] = pathSegments
     
-    const resourceLength = resource.length()
-    const idLength = id.length()
+    const data = await fetch('https://api.github.com/gists/' + id).then(res => res.json())
     
-    const data = { resourceLength, resource, idLength, id, hello: user.city }
+//     const resourceLength = resource.length()
+    const idLength = id?.length()
     
-    return json({ api, data, user })
+//     const data = { id, hello: user.city }
+    
+    return json({ api, idLength, data,  user })
   }
 }
 
