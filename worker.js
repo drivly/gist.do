@@ -36,7 +36,7 @@ export default {
     const { user, hostname, pathname, rootPath, pathSegments, query } = await env.CTX.fetch(req).then(res => res.json())
     if (rootPath) return json({ api, gettingStarted, examples, user })
     
-    const gistId = pathSegments[0] == 32 ? pathSegments[0] : pathSegments[1]
+    const gistId = pathSegments[0].length == 32 ? pathSegments[0] : pathSegments[1]
     
     
     const gistURL = 'https://api.github.com/gists/' + gistId
