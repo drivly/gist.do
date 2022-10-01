@@ -75,7 +75,7 @@ export default {
       
       // TODO - comment on the Gist with workerURL
 
-      return json({ api, deployment, workerURL, fileNames, files, codeLines, build, user })
+      return json({ api, deployment, workerURL, fileNames, files, gist, build, user })
     } else {
       // TODO call the dynamic service binding
       
