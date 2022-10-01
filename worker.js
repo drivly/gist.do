@@ -53,19 +53,27 @@ export default {
       const workerURL = `https://${gistId}.gist.do`
 
       const gistURL = 'https://api.github.com/gists/' + gistId
-      const data = await fetch(gistURL,{headers}).then(res => res.json()).catch(({name,message,stack}) => ({name,message,stack}))
+      const gistContext = await fetch(gistURL,{headers}).then(res => res.json()).catch(({name,message,stack}) => ({name,message,stack}))
 
-      const { files } = data
+      const { files } = gistContext
       const fileNames = Object.keys(files)
 
       const build = await Promise.all(fileNames.map(name => fetch(files[name].raw_url.replace('https://','https://esbuild.do/')).then(res => res.text())))
       const codeLines = build.map(file => file.split('\n'))
       
-      // TODO - deploy worker
+      const deployment = await fetch('https://workers.do/api/deploy', {
+        method: 'POST',
+        body: JSON.stringify({ 
+          name: gistId.slice(0,7),
+//           domain: `${domain}`,
+          context: gistContext,
+          worker: build,
+        }),
+      }).then(res => res.json()).catch(({name, message, stack}) => ({ error: {name, message, stack}}))
       
       // TODO - comment on the Gist with workerURL
 
-      return json({ api, workerURL, fileNames, files, codeLines, build, user })
+      return json({ api, deployment, workerURL, fileNames, files, codeLines, build, user })
     } else {
       // TODO call the dynamic service binding
       
