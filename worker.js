@@ -66,7 +66,7 @@ export default {
       const deployment = await fetch('https://workers.do/api/deploy', {
         method: 'POST',
         body: JSON.stringify({ 
-          name: gistId,
+          name: gist.description.toLowerCase().replaceAll(' ','-'),
 //           domain: `${domain}`,
           gist,
           worker: build,
