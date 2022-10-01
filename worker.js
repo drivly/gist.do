@@ -50,6 +50,8 @@ export default {
       const [ type, id ] = pathSegments
       const gistId = type.length == 32 ? type : id
       
+      console.log({gistId})
+      
       const workerURL = `https://${gistId}.gist.do`
 
       const gistURL = 'https://api.github.com/gists/' + gistId
@@ -64,7 +66,7 @@ export default {
       const deployment = await fetch('https://workers.do/api/deploy', {
         method: 'POST',
         body: JSON.stringify({ 
-          name: gistId.slice(0,7),
+          name: gistId,
 //           domain: `${domain}`,
           context: gistContext,
           worker: build,
