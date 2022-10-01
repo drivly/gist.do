@@ -33,7 +33,11 @@ const headers = {
 
 export default {
   fetch: async (req, env) => {
-    const { user, hostname, pathname, subdomain, rootPath, pathSegments, query } = await env.CTX.fetch(req).then(res => res.json())
+    const ctx = await env.CTX.fetch(req).then(res => res.json())
+    const { user, hostname, pathname, subdomain, rootPath, pathSegments, query } = ctx
+    
+    console.log({ctx})
+    
     if (rootPath && !subdomain) return json({ api, gettingStarted, examples, user })
     
     const workerId = subdomain && subdomain.length == 32 ? subdomain : undefined
