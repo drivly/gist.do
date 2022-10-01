@@ -55,9 +55,9 @@ export default {
       const workerURL = `https://${gistId}.gist.do`
 
       const gistURL = 'https://api.github.com/gists/' + gistId
-      const gistContext = await fetch(gistURL,{headers}).then(res => res.json()).catch(({name,message,stack}) => ({name,message,stack}))
+      const gist = await fetch(gistURL,{headers}).then(res => res.json()).catch(({name,message,stack}) => ({name,message,stack}))
 
-      const { files } = gistContext
+      const { files } = gist
       const fileNames = Object.keys(files)
 
       const build = await Promise.all(fileNames.map(name => fetch(files[name].raw_url.replace('https://','https://esbuild.do/')).then(res => res.text())))
@@ -68,7 +68,7 @@ export default {
         body: JSON.stringify({ 
           name: gistId,
 //           domain: `${domain}`,
-          context: gistContext,
+          gist,
           worker: build,
         }),
       }).then(res => res.json()).catch(({name, message, stack}) => ({ error: {name, message, stack}}))
